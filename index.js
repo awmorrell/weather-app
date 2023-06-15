@@ -10,6 +10,7 @@ function handleKeyPress(event) {
   if (event.key === 'Enter') {
     event.preventDefault();
     searchButton.click();
+    event.target.blur();
   }
 }
 
