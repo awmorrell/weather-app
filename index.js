@@ -17,7 +17,6 @@ function handleKeyPress(event) {
 document.addEventListener('keypress', handleKeyPress);
 
 searchButton.addEventListener('click', () => {
-	const APIKey = 'b39d513a750acb9a5bc743d054326fa9';
 	const city = document.querySelector('.search-box input').value;
 
 	if (city === '')
@@ -27,7 +26,11 @@ searchButton.addEventListener('click', () => {
 	weatherDetails.classList.remove('fade-in');
 	timeDetails.classList.remove('fade-in');
 
-	fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}&units=imperial`)
+  const requestOptions = {
+    method: 'GET'
+  };
+
+	fetch(`https://weather-app-proxy1-af2cdf67cffc.herokuapp.com/weather?city=${encodeURIComponent(city)}`, requestOptions)
 		.then(response => response.json())
 		.then(json => {
 
@@ -65,10 +68,11 @@ searchButton.addEventListener('click', () => {
 
 			let sunset;
 			sunsetHours > 12 ? sunset = `${sunsetHours - 12}:${sunsetMinutes}` + ' PM' : sunset = `${sunsetHours}:${sunsetMinutes}` + ' PM';
+			
 			//Current Local Time
 			const currentTime = new Date();
 				currentTime.setSeconds(currentTime.getSeconds() + json.timezone);
-					const localHours = currentTime.getUTCHours().toString().padStart(2, '0');
+					const localHours = currentTime.getUTCHours().toString().padStart(2);
 					const localMinutes = currentTime.getUTCMinutes().toString().padStart(2, '0');
 					const localSeconds = currentTime.getUTCSeconds().toString().padStart(2, '0');
 					let localtime;
@@ -101,6 +105,8 @@ searchButton.addEventListener('click', () => {
 			const localTime = document.querySelector('.time-details .time-now span');
 			const sunriseTime = document.querySelector('.time-details .sunrise span');
 			const sunsetTime = document.querySelector('.time-details .sunset span');
+			longitude = json.coord.lon;
+			latitude = json.coord.lat;
 
 			switch (json.weather[0].main) {
 				case 'Clear':
@@ -161,5 +167,5 @@ searchButton.addEventListener('click', () => {
 
 			console.log(json);
 
-		})
+		});
 })
