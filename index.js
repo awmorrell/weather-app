@@ -264,12 +264,11 @@ searchButton.addEventListener('click', () => {
 				    		articleTwo.setAttribute('href', articles[1].url);				    		
 				    	}
 					} else if (json.news.length === 1) {
-							const articles = json.news[0];
-				    	if (articles[0].title.length === 0) {
+				    	if (json.news[0].title.length === 0) {
 				    		articleOne.innerHTML = '';
 				    	} else {
-				    	articleOne.innerHTML = "- " + articles[0].title;
-				    		articleOne.setAttribute('href', articles[0].url);				    		
+				    	articleOne.innerHTML = "- " + json.news[0].title;
+				    		articleOne.setAttribute('href', json.news[0].url);				    		
 				    	}
 					}	else if (json.news.length === 0) {
 							articleOne.innerHTML = "";
