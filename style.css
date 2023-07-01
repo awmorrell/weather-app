@@ -44,7 +44,7 @@
 
 .container {
 	position: relative;
-	overflow: hidden;
+	overflow: scroll;
 	width: 400px;
 	height: 100px;
 	max-width: 90vw;
