@@ -211,7 +211,7 @@ searchButton.addEventListener('click', () => {
 
 	const country = json.sys.country.toLowerCase();
 	
-	articleOne.innerHTML = "Searching...";
+	articleOne.innerHTML = "Searching... this might take awhile.";
 
 	let controller;
 	let signal;
